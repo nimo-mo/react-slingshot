@@ -5,6 +5,7 @@ import App from './components/App';
 import HomePage from './components/HomePage';
 import FuelSavingsPage from './containers/FuelSavingsPage'; // eslint-disable-line import/no-named-as-default
 import AboutPage from './components/AboutPage';
+// import LoginPage from './components/LoginPage';
 import NotFoundPage from './components/NotFoundPage';
 
 export default (
