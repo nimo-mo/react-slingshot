@@ -1,36 +1,43 @@
-class StorageHelper {
-  static setItem(key, value, options={}) {
-    if (options.expire) options.storeTime = new Date().getTime() + options.expire*24*60*60*1000
-    localStorage.setItem(key, JSON.stringify({
-      value,
-      options
-    }))
-  }
+import { storagePrefix } from '../constants/constants';
 
-  static getItem(key){
-    const data = JSON.parse(localStorage.getItem(key));
-    if (data === null) return null
-    const { value, options } = data
-    if (options.expire === undefined) {
+class StorageHelper {
+  static getItem(name, prefix) {
+    const newName = this.addPrefix(name, prefix || storagePrefix);
+    const storeData = JSON.parse(localStorage.getItem(newName));
+    if (storeData === null) return null
+    const { value, options } = storeData;
+    const { expire, storeTime } = options;
+    if (expire === undefined) {
       return value
     } else {
-      if (options.storeTime - new Date().getTime() > 0) {
+      if (storeTime - new Date().getTime() > 0) {
         return value
       } else {
-        localStorage.removeItem(key);
+        localStorage.removeItem(newName);
         return null
       }
     }
   }
 
-  static removeItem(key) {
-    localStorage.removeItem(key)
+  static setItem(name, value, options) {
+    options = options || {};
+    if (options.expire) options.storeTime = new Date().getTime() + options.expire*24*60*60*1000;
+    const newName = this.addPrefix(name, options.prefix || storagePrefix)
+    localStorage.setItem(newName, JSON.stringify({value,options}))
+  }
+
+  static removeItem(name, prefix) {
+    const newName = this.addPrefix(name, prefix || storagePrefix)
+    localStorage.removeItem(newName)
   }
 
   static clear() {
     localStorage.clear()
   }
 
+  static addPrefix(name, prefix) {
+    return prefix ? `${prefix}:${name}` : name
+  }
 }
 
 export default StorageHelper;
