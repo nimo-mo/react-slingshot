@@ -1,10 +1,11 @@
 
 import StorageHelper from './StorageHelper';
+import environment from '../environment';
 
-const api_prefix = '';
-const iam_api_prefix = 'https://ijapi3.wolaidai.com:9002/';
+const { server, iamServer } = environment;
 
 function checkStatus(response) {
+  console.log('checkStatus')
   if (response.status >= 200 && response.status < 300) {
     return response
   } else {
@@ -53,25 +54,26 @@ function getHeadersOptions(options) {
 function getRequestOprions(options) {
   const requestOprions = Object.assign({},options);
   requestOprions.mode = 'cors';
-  requestOprions.credentials = 'include';
+  // requestOprions.credentials = 'include';
   requestOprions.headers = new Headers(getHeadersOptions(options.headers));
   // console.log(requestOprions.headers.get('Content-Type'))
   // console.log(requestOprions.headers.get('X-User-Token'))
   // console.log(requestOprions.headers.get('X-User-Mobile'))
   if (options && options.body) requestOprions.body = JSON.stringify(options.body);
-  return requestOprions
+  console.log(requestOprions);
+  return requestOprions;
 }
 
 function getRequestUrl(input) {
   let requestUrl = ''
   // audio server
-  if (isAudioUrl(input)) requestUrl = `${api_prefix}${input}`.replace('/approval/api/','/')
+  if (isAudioUrl(input)) requestUrl = `${server}${input}`.replace('/approval/api/','/')
   // iam server
-  else if (isIamUrl(input)) requestUrl = `${iam_api_prefix}${input}`
+  else if (isIamUrl(input)) requestUrl = `${iamServer}${input}`
   // absolute remote url
   else if (isHttpUrl(input)) requestUrl = input
   // current server
-  else requestUrl = `${api_prefix}${input}`
+  else requestUrl = `${server}${input}`
   return requestUrl
 }
 
@@ -88,5 +90,8 @@ function fetchJson(input,init) {
     .catch(errorHandler)
 }
 
-export default fetchJson;
+export {
+  fetchJson,
+  // other helper
+}
 

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Link, IndexLink } from 'react-router';
 import { AppBar } from 'material-ui';
 import StorageHelper from '../utils/StorageHelper';
-import fetchJson from '../utils/fetchJson';
+import { fetchJson } from '../utils/fetchHelper';
 
 // This is a class-based component because the current
 // version of hot reloading won't hot reload a stateless
@@ -30,7 +30,7 @@ class App extends React.Component {
   componentDidMount() {
     fetchJson('sso/login', {
       method: 'POST',
-      body: {username: "18902466911", password: "Ab123456*"},
+      body: {username: "18902466666", password: "Ab123456*"},
     }).then(data=>{
       // console.log(data)
     })
