@@ -1,0 +1,26 @@
+textarea { resize: vertical }
+a {
+  color: #ff4081;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+html {
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+body {
+  font-size: 15px;
+  line-height: 24px;
+}
+
+html, body, .app {
+  height: 100%;
+}

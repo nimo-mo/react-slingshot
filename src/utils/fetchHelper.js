@@ -5,11 +5,10 @@ import environment from '../environment';
 const { server, iamServer } = environment;
 
 function checkStatus(response) {
-  console.log('checkStatus')
   if (response.status >= 200 && response.status < 300) {
     return response
   } else {
-    var error = new Error(response.statusText)
+    const error = new Error(response.statusText)
     error.response = response
     throw error
   }
@@ -53,14 +52,10 @@ function getHeadersOptions(options) {
 
 function getRequestOprions(options) {
   const requestOprions = Object.assign({},options);
-  requestOprions.mode = 'cors';
+  // requestOprions.mode = 'cors';
   // requestOprions.credentials = 'include';
   requestOprions.headers = new Headers(getHeadersOptions(options.headers));
-  // console.log(requestOprions.headers.get('Content-Type'))
-  // console.log(requestOprions.headers.get('X-User-Token'))
-  // console.log(requestOprions.headers.get('X-User-Mobile'))
   if (options && options.body) requestOprions.body = JSON.stringify(options.body);
-  console.log(requestOprions);
   return requestOprions;
 }
 

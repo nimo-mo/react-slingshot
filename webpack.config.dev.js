@@ -10,6 +10,7 @@ export default {
   devtool: 'source-map', // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
   entry: [
     // must be first entry to properly set public path
+    'whatwg-fetch',
     './src/webpack-public-path',
     'react-hot-loader/patch',
     'webpack-hot-middleware/client?reload=true',

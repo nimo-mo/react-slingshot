@@ -1,0 +1,15 @@
+.pos-abs { position:absolute }
+.pos-rel { position:relative }
+.pos-fixed { position:fixed }
+.pos-sticky { position:fixed; position:-webkit-sticky; position:sticky }
+.no-wrap { white-space: nowrap }
+.pre-wrap { white-space: pre-wrap }
+.text-break { word-break: break-all }
+.text-ellipsis {
+  white-space:nowrap; 
+  text-overflow:ellipsis; 
+  -o-text-overflow:ellipsis; 
+  overflow: hidden; 
+}
+.text-right { text-align: right }
+.text-center { text-align: center }
